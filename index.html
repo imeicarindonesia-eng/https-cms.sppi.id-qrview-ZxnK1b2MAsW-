@@ -1,73 +1,27 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR View - CMS SPPI</title>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            text-align: center;
-            background-color: #f4f4f4;
+    <meta charset="utf-8">
+    <title>Verifikasi LSPPI...</title>
+    <script type="text/javascript">
+        var l = window.location;
+        // Deteksi link scan /qrview/
+        if (l.pathname.includes('/qrview/')) {
+            var parts = l.pathname.split('/qrview/');
+            var id = parts[parts.length - 1].replace(/\/$/, "");
+            var repoPath = parts[0];
+            if (!repoPath.endsWith('/')) repoPath += '/';
+
+            // Alihkan ke index.html dengan ID sebagai parameter pencarian
+            var target = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repoPath + '?id=' + encodeURIComponent(id);
+            window.location.replace(target);
+        } else {
+            // Jika bukan link scan, balik ke halaman utama repositori
+            window.location.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/')[1] + '/');
         }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        #reader {
-            width: 100%;
-            margin: 20px auto;
-        }
-        #result {
-            background: #e9ecef;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            min-height: 20px;
-            word-break: break-all;
-            font-size: 14px;
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .url {
-            color: #666;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-    </style>
+    </script>
 </head>
-<body>
-
-<div class="container">
-    <h2>SCAN QR CODE / BARCODE</h2>
-    <p class="url">cms.sppi.id/qrview</p>
-
-    <div id="reader"></div>
-
-    <div>
-        <h4>Hasil Isi Kode:</h4>
-        <div id="result">Menunggu scan...</div>
-    </div>
-</div>
-
-<script>
-    function onScanSuccess(decodedText, decodedResult) {
-        document.getElementById("result").innerHTML = decodedText;
-        console.log(`Scan hasil: ${decodedText}`);
-    }
-
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", { fps: 10, qrbox: 250 });
-    html5QrcodeScanner.render(onScanSuccess);
-</script>
-
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <p>Sedang memverifikasi data, mohon tunggu...</p>
 </body>
 </html>
