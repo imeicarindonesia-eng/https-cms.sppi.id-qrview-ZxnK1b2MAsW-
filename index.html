@@ -271,6 +271,7 @@
         </aside>
     </div>
 
+    <!-- LOGIKA FIREBASE CLOUD & SINKRONISASI -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -426,7 +427,7 @@
                 window.renderDB(); window.updateLive();
             }, () => { isCloud = false; document.getElementById('storage-status').innerText = "Local Mode (Offline)"; });
 
-            // PENDETEKSI SCAN OTOMATIS
+            // PENDETEKSI SCAN OTOMATIS: Mengekstrak ID dari URL untuk memunculkan tabel putih
             const path = window.location.pathname;
             const searchId = new URLSearchParams(window.location.search).get('id');
             let scanId = searchId;
